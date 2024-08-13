@@ -1,5 +1,6 @@
 ﻿using ConsoleUI;
 using System.Globalization;
+using System.Text.Json;
 
 string FilePath = "C:\\CTS Projects\\ConsoleUI\\RawData.txt";
 List<string> Lines = File.ReadAllLines(FilePath).ToList();
@@ -31,5 +32,9 @@ foreach (Employee employee in Employees)
         $"Antipass:{employee.Antipass} " +
         $"ProxyWork:{employee.ProxyWork} " +
         $"DateTime:{employee.DateTime.ToString("yyyy-MM-dd HH:mm:ss")}");
+
+    var option = new JsonSerializerOptions();
+    option.WriteIndented = true;
+    Console.WriteLine(JsonSerializer.Serialize(employee,option)+'\n');
 }
 Console.ReadKey();
